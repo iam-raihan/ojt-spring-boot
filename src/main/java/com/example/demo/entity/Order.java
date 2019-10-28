@@ -1,6 +1,8 @@
-//tag::all[]
-//tag::allButValidation[]
 package com.example.demo.entity;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -9,50 +11,54 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 import lombok.Data;
 
+//tag::newFields[]
 @Data
 public class Order {
+  
+  private Long id;
+  
+  private Date placedAt;
+  
+//end::newFields[]
 
-  //end::allButValidation[]
-  @NotBlank(message="Name is required")
-  //tag::allButValidation[]
-  private String name;
-  //end::allButValidation[]
-
+  @NotBlank(message="Delivery name is required")
+  private String deliveryName;
+  
   @NotBlank(message="Street is required")
-  //tag::allButValidation[]
-  private String street;
-  //end::allButValidation[]
-
+  private String deliveryStreet;
+  
   @NotBlank(message="City is required")
-  //tag::allButValidation[]
-  private String city;
-  //end::allButValidation[]
-
+  private String deliveryCity;
+  
   @NotBlank(message="State is required")
-  //tag::allButValidation[]
-  private String state;
-  //end::allButValidation[]
-
+  private String deliveryState;
+  
   @NotBlank(message="Zip code is required")
-  //tag::allButValidation[]
-  private String zip;
-  //end::allButValidation[]
+  private String deliveryZip;
 
   @CreditCardNumber(message="Not a valid credit card number")
-  //tag::allButValidation[]
   private String ccNumber;
-  //end::allButValidation[]
-
+  
   @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
            message="Must be formatted MM/YY")
-  //tag::allButValidation[]
   private String ccExpiration;
-  //end::allButValidation[]
 
   @Digits(integer=3, fraction=0, message="Invalid CVV")
-  //tag::allButValidation[]
   private String ccCVV;
 
+  private List<Taco> tacos = new ArrayList<>();
+  
+  public void addDesign(Taco design) {
+    this.tacos.add(design);
+  }
+  
+  /*
+// tag::newFields[]
+  ...
+
+// end::newFields[]
+   */
+//tag::newFields[]
 }
-//end::allButValidation[]
-//end::all[]
+//end::newFields[]
+
