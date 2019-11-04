@@ -28,16 +28,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/design")
 public class DesignTacoController {
-	
-	private IngredientRepository ingredientRepository;
+private IngredientRepository ingredientRepository;
 	
 	
 	@Autowired
 	public DesignTacoController(JdbcIngredientRepository ingredientRepository) {
 		this.ingredientRepository = ingredientRepository;
 	}
-	
-	
 
     @GetMapping
     public String showDesignForm(Model model) {
@@ -73,4 +70,8 @@ public class DesignTacoController {
     }
 
 //end::filterByType[]
+
+   
+    
+   
 }

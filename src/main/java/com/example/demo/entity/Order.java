@@ -9,10 +9,12 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import lombok.Builder;
 import lombok.Data;
 
 //tag::newFields[]
 @Data
+@Builder
 public class Order {
   
   private Long id;
