@@ -29,12 +29,12 @@
   </properties>
 
   <dependencies>
-  	<!-- tag::thymeleaf[] -->
+  	<!-- tag::persistence[] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
-  	<!-- end::thymeleaf[] -->
+  	<!-- end::persistence[] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
