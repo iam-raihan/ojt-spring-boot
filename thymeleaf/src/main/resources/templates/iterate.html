@@ -7,7 +7,7 @@
     <th>Delivery Name</th>
   </tr>
   <tr th:each="order : ${orders}">
-    <td th:text="${order.id}">Onions</td>
-    <td th:text="${order.deliveryName}">2.41</td>
+    <td th:text="${order.name}">Onions</td>
+    <td th:text="${order.street}">2.41</td>
   </tr>
 </table>

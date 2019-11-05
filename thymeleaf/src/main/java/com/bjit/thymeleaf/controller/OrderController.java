@@ -16,20 +16,38 @@ import javax.validation.Valid;
 @RequestMapping("/orders")
 public class OrderController {
 	
-	@GetMapping("/current")
-	public String orderForm(Model model) {
-		model.addAttribute("order", Order.builder().build());
-		return "orderForm";
-	}
-	
-	@PostMapping
-	public String processOrder(@Valid Order order,Errors errors) {
-		if(errors.hasErrors()) {
-    		return "orderForm";
-    	}
-	 log.info("Order submitted: " + order);
-	 return "redirect:/";
-	}
+	//end::baseClass[]
+	//tag::orderForm[]
+	  @GetMapping("/current")
+	  public String orderForm(Model model) {
+	    model.addAttribute("order", Order.builder().build());
+	    return "orderForm";
+	  }
+	//end::orderForm[]
+
+	/*
+	//tag::handlePost[]
+	  @PostMapping
+	  public String processOrder(Order order) {
+	    log.info("Order submitted: " + order);
+	    return "redirect:/";
+	  }
+	//end::handlePost[]
+	*/
+	  
+	//tag::handlePostWithValidation[]
+	  @PostMapping
+	  public String processOrder(@Valid Order order, Errors errors) {
+	    if (errors.hasErrors()) {
+	      return "orderForm";
+	    }
+	    
+	    log.info("Order submitted: " + order);
+	    return "redirect:/";
+	  }
+	//end::handlePostWithValidation[]
+	  
+	//tag::baseClass[]
 	
 
 }

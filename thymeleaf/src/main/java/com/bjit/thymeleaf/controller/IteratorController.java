@@ -19,10 +19,10 @@ public class IteratorController {
     public String getOrders(Model model) {
     	List<Order> orders = new ArrayList<>();
     	
-    	orders.add(Order.builder().deliveryName("ORDER 1").id(101l).build());
-    	orders.add(Order.builder().deliveryName("ORDER 2").id(102l).build());
-    	orders.add(Order.builder().deliveryName("ORDER 3").id(103l).build());
-    	orders.add(Order.builder().deliveryName("ORDER 4").id(104l).build());
+    	orders.add(Order.builder().name("ORDER 1").street("Street 1").build());
+    	orders.add(Order.builder().name("ORDER 2").street("Street 2").build());
+    	orders.add(Order.builder().name("ORDER 3").street("Street 3").build());
+    	orders.add(Order.builder().name("ORDER 4").street("Street 4").build());
     	
     	model.addAttribute("orders",orders);
 
