@@ -20,7 +20,7 @@ public class OrderController {
 	//tag::orderForm[]
 	  @GetMapping("/current")
 	  public String orderForm(Model model) {
-	    model.addAttribute("order", Order.builder().build());
+	    model.addAttribute("order", new Order());
 	    return "orderForm";
 	  }
 	//end::orderForm[]

@@ -16,10 +16,11 @@
     <description>On Job Training</description>
 
 	<modules>
-		<!--<module>jsp</module>
+		<module>jsp</module>
 		<module>persistence</module>
-		<module>error</module>-->
+		<module>error</module>
 		<module>persistance</module>
+		<module>persistence-jpa</module>
 	</modules>
 
     <properties>

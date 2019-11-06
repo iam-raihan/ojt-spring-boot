@@ -2,11 +2,11 @@ package com.bjit.persistence.controller;
 
 import com.bjit.persistence.entity.Ingredient;
 import com.bjit.persistence.entity.Ingredient.Type;
-import com.bjit.persistence.entity.Order;
-import com.bjit.persistence.entity.Taco;
 import com.bjit.persistence.repository.IngredientRepository;
 import com.bjit.persistence.repository.JdbcIngredientRepository;
 import com.bjit.persistence.repository.TacoRepository;
+import com.bjit.persistence.entity.Order;
+import com.bjit.persistence.entity.Taco;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
