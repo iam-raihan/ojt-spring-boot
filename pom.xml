@@ -17,7 +17,7 @@
 
 	<modules>
 		<module>jsp</module>
-		<module>persistence</module>
+		<module>persistance</module>
 		<module>error</module>
 		<module>persistance</module>
 		<module>persistence-jpa</module>
