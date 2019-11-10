@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.bjit.persistence.jpa.data.IngredientRepository;
 import com.bjit.persistence.jpa.data.OrderRepository;
 import com.bjit.persistence.jpa.data.TacoRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
+@Ignore
 public class HomeControllerTest {
 
   @Autowired

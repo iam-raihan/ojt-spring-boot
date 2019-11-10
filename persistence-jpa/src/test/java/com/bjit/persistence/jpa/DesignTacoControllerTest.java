@@ -16,6 +16,7 @@ import com.bjit.persistence.jpa.data.OrderRepository;
 import com.bjit.persistence.jpa.data.TacoRepository;
 import com.bjit.persistence.jpa.web.DesignTacoController;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(DesignTacoController.class)
+@Ignore
 public class DesignTacoControllerTest {
 
   @Autowired
