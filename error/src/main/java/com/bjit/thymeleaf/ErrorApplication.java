@@ -10,9 +10,9 @@ import com.bjit.thymeleaf.error.MailConfigurationDev;
 import com.bjit.thymeleaf.error.MailConfigurationProd;
 
 @SpringBootApplication
-public class ThymeLeafApplication {
+public class ErrorApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ThymeLeafApplication.class, args);
+		SpringApplication.run(ErrorApplication.class, args);
 	}
 
 	@Profile("production")

@@ -9,10 +9,10 @@ import com.bjit.persistence.jpa.Ingredient.Type;
 import com.bjit.persistence.jpa.data.IngredientRepository;
 
 @SpringBootApplication
-public class TacoCloudApplication {
+public class JPAApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(TacoCloudApplication.class, args);
+    SpringApplication.run(JPAApplication.class, args);
   }
 
   @Bean

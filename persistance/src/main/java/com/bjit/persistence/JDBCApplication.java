@@ -10,9 +10,9 @@ import com.bjit.persistence.error.MailConfigurationDev;
 import com.bjit.persistence.error.MailConfigurationProd;
 
 @SpringBootApplication
-public class ThymeLeafApplication {
+public class JDBCApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ThymeLeafApplication.class, args);
+		SpringApplication.run(JDBCApplication.class, args);
 	}
 
 	@Profile("production")

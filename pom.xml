@@ -17,7 +17,7 @@
 
 	<modules>
 		<module>jsp</module>
-		<module>persistance</module>
+		<module>thymeleaf</module>
 		<module>error</module>
 		<module>persistance</module>
 		<module>persistence-jpa</module>
