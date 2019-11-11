@@ -6,7 +6,7 @@
 </head>
 
 <body>
-
+<a th:href="@{/logout}">Logout</a>
 <form method="POST" th:object="${department}">
     <h1>Department Form</h1>
     <div th:if="${#fields.hasErrors()}">
