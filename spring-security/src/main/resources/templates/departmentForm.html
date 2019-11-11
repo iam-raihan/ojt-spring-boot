@@ -14,7 +14,7 @@
         Please correct the problems below and resubmit.
         </span>
     </div>
-
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <label for="name">Name: </label>
     <input id="name" type="text" th:field="*{name}"/>
     <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
