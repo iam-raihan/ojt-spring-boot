@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,37 +20,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-    public static final String DEF_USERS_BY_USERNAME_QUERY =
-            "select username,password,enabled " +
-                    "from users " +
-                    "where username = ?";
-    public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY =
-            "select username,authority " +
-                    "from authorities " +
-                    "where username = ?";
-    public static final String DEF_GROUP_AUTHORITIES_BY_USERNAME_QUERY =
-            "select g.id, g.group_name, ga.authority " +
-                    "from groups g, group_members gm, group_authorities ga " +
-                    "where gm.username = ? " +
-                    "and g.id = ga.group_id " +
-                    "and g.id = gm.group_id";
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws
             Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
-               // .withDefaultSchema()
-                //.withUser(User.withUsername("user")
-                //        .password(passwordEncoder().encode("pass"))
-               //         .roles("USER"));
+        auth.userDetailsService(userDetailsService)
+        //auth.jdbcAuthentication().dataSource(dataSource)
+               /*.withDefaultSchema()
+                .withUser(User.withUsername("user")
+                        .password(passwordEncoder().encode("pass"))
+                        .roles("USER"));*/
+        .passwordEncoder(passwordEncoder());
         
-        
-//        .usersByUsernameQuery(
-//        		 "select username, password, enabled from Users " +
-//        		 "where username=?")
-//		 .authoritiesByUsernameQuery(
-//        		 "select username, authority from UserAuthorities " +
-//        		 "where username=?");
+       /* .usersByUsernameQuery(
+        		 "select username, password, enabled from Users " +
+        		 "where username=?")
+		 .authoritiesByUsernameQuery(
+        		 "select username, authority from Authorities " +
+        		 "where username=?");*/
 
         /*auth.inMemoryAuthentication().withUser("admin")
                 .password("{noop}admin").authorities("ROLE_USER").and().withUser("test")
@@ -68,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**")
                 .permitAll()
                 .antMatchers("/employee", "/department").access("hasRole('ROLE_USER')")
+                .antMatchers("/register/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

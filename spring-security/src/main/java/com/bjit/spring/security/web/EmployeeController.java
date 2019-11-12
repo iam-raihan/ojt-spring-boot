@@ -16,8 +16,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/employee")
-@SessionAttributes("order")
-
 public class EmployeeController {
     private EmployeeRepository employeeRepo;
     private DepartmentRepository departmentRepo;
