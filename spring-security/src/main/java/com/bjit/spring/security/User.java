@@ -30,10 +30,12 @@ public class User implements UserDetails {
     private final String state;
     private final String zip;
     private final String phoneNumber;
+    private final Boolean status;
+    
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Override
