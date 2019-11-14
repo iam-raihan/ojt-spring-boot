@@ -2,6 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.1.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -16,12 +28,15 @@
     <description>On Job Training</description>
 
 	<modules>
-		<!--<module>jsp</module>
+		<module>jsp</module>
 		<module>thymeleaf</module>
 		<module>error</module>
 		<module>persistance</module>
 		<module>persistence-jpa</module>
-		<module>spring-security</module>-->
+		<module>spring-security</module>
+		<module>spring-integration</module>
 		<module>spring-misc</module>
+
+        <module>raihan-project</module>
 	</modules>
 </project>
