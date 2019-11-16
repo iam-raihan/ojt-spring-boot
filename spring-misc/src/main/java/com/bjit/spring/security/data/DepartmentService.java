@@ -28,7 +28,6 @@ public class DepartmentService {
 	@CachePut(cacheNames = "departments",key = "#department.id")
 	public Department save(Department department){
 		return departmentRepository.save(department);
-		
 	}
 	
 	@CacheEvict(value="departments", allEntries=true)

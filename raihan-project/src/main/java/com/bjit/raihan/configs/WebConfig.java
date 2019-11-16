@@ -1,4 +1,4 @@
-package com.bjit.raihan;
+package com.bjit.raihan.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

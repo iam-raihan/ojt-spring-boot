@@ -1,10 +1,8 @@
-package com.bjit.raihan.controller;
+package com.bjit.raihan.api.controllers;
 
 import com.bjit.raihan.repository.ItemRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 
-@Controller
+@RestController
 @RequestMapping("items")
-public class ItemController {
+public class ItemRestController {
 
     @Autowired
     private ItemRepository itemRepository;

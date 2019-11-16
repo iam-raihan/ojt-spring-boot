@@ -4,7 +4,7 @@ import com.bjit.raihan.entity.ItemEntity;
 import com.bjit.raihan.entity.MenuEntity;
 import com.bjit.raihan.entity.OrderEntity;
 import com.bjit.raihan.repository.ItemRepository;
-import com.bjit.raihan.repository.MenuDao;
+import com.bjit.raihan.repository.MenuRepository;
 import com.bjit.raihan.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
 public class DatabaseSeeder {
 
     @Autowired
-    private MenuDao menuDao;
+    private MenuRepository menuRepository;
     @Autowired
     private ItemRepository itemRepository;
     @Autowired
@@ -48,8 +48,8 @@ public class DatabaseSeeder {
                 .type(ItemEntity.Types.SubItem)
                 .build();
 
-        if(itemRepository.count() == 0)
-            itemRepository.saveAll(Arrays.asList(item1, item2, item3));
+        itemRepository.deleteAll();
+        itemRepository.saveAll(Arrays.asList(item1, item2, item3));
 
         /*
          *  Seed Menu
@@ -58,8 +58,8 @@ public class DatabaseSeeder {
         MenuEntity menu2 = MenuEntity.builder().name("Set Menu 2").items(List.of(item2, item3)).build();
         MenuEntity menu3 = MenuEntity.builder().name("Set Menu 3").items(List.of(item1, item2)).build();
 
-        if(menuDao.count() == 0)
-            menuDao.saveAll(Arrays.asList(menu1, menu2, menu3));
+        menuRepository.deleteAll();
+        menuRepository.saveAll(Arrays.asList(menu1, menu2, menu3));
 
         /*
          *  Seed Order
@@ -68,7 +68,7 @@ public class DatabaseSeeder {
         OrderEntity order2 = new OrderEntity().setItems(List.of(item2, item3));
         OrderEntity order3 = new OrderEntity().setItems(List.of(item1, item3));
 
-        if(orderRepository.count() == 0)
+        orderRepository.deleteAll();
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
     }
 }

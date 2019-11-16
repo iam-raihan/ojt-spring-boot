@@ -1,15 +1,15 @@
-package com.bjit.raihan.controller;
+package com.bjit.raihan.api.controllers;
 
 import com.bjit.raihan.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/orders")
-public class OrderController {
+@RestController
+@RequestMapping("api/orders")
+public class OrderRestController {
 
     @Autowired
     private OrderRepository orderRepository;

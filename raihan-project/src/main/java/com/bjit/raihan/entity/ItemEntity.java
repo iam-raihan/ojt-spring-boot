@@ -4,21 +4,17 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
 
 @Data
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode(callSuper = true)
 
-@Entity
+@Entity(name = "Items")
 @Table(name = "items")
-public class ItemEntity {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class ItemEntity extends BaseEntity {
 
     @NotBlank
     private String name;
@@ -26,23 +22,11 @@ public class ItemEntity {
     @Min(value = 0)
     private double price;
 
+    @Builder.Default
     private Types type = Types.SubItem;
 
     public enum Types {
         MainItem, SubItem
-    }
-
-    private Date createdAt;
-    private Date updatedAt;
-
-    @PrePersist
-    private void setCreatedAt() {
-        this.createdAt = new Date();
-    }
-
-    @PreUpdate
-    private void setUpdatedAt() {
-        this.updatedAt = new Date();
     }
 
     @PreRemove

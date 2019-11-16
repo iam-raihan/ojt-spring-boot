@@ -1,7 +1,9 @@
 package com.bjit.raihan.repository;
 
 import com.bjit.raihan.entity.ItemEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ItemRepository extends CrudRepository<ItemEntity, Integer> {
+//@Repository
+public interface ItemRepository extends IExtendedRepository<ItemEntity, Long> {
+
 }

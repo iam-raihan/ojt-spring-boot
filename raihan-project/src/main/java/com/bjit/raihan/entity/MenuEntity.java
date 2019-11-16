@@ -8,20 +8,14 @@ import java.util.List;
 
 @Data
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode(callSuper = true)
 
-@Entity
+@Entity(name = "Menus")
 @Table(name = "menus")
-public class MenuEntity {
-
-    @Id
-    @SequenceGenerator(name = "mySeqGen", sequenceName = "menuSeq", allocationSize = 10)
-    @GeneratedValue(generator = "mySeqGen")
-    // or
-    // @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class MenuEntity extends BaseEntity {
 
     @NotBlank(message = "Menu name is required")
     private String name;

@@ -11,17 +11,14 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode(callSuper = true)
 
-@Entity
+@Entity(name = "Orders")
 @Table(name = "orders")
-public class OrderEntity {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class OrderEntity extends BaseEntity {
 
     @NotBlank()
     private String details;
