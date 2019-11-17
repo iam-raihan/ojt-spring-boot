@@ -1,4 +1,4 @@
-package com.bjit.raihan.data;
+package com.bjit.raihan.repository;
 
 import com.bjit.raihan.entity.MenuEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
