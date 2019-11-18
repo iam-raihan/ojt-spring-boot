@@ -4,7 +4,6 @@ import com.bjit.raihan.entity.MenuEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-//@Repository
 public interface MenuRepository extends IExtendedRepository<MenuEntity, Long> {
 
 }

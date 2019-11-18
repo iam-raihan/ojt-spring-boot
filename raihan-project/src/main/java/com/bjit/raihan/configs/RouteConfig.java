@@ -13,6 +13,12 @@ import java.lang.reflect.Method;
 
 @Configuration
 public class RouteConfig {
+
+    /**
+     * Adds prefix "/api/" to @RestController
+     * Code from Stackoverflow of course!
+     */
+
     @Bean
     public WebMvcRegistrations webMvcRegistrationsHandlerMapping() {
         return new WebMvcRegistrations() {

@@ -42,6 +42,5 @@ public class MenuService implements IService<MenuEntity, MenuRepository>{
     }
 
     @CacheEvict(value="menus", allEntries = true)
-    public void clearCache() {
-    }
+    public void clearCache() { }
 }

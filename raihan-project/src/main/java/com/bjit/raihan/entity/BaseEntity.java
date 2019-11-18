@@ -1,9 +1,10 @@
 package com.bjit.raihan.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.CreationTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,15 +21,19 @@ public abstract class BaseEntity {
     // @GeneratedValue(generator = "mySeqGen")
     protected Long id;
 
+    @CreationTimestamp
     protected Date createdAt;
 
+    @UpdateTimestamp
     protected Date updatedAt;
 
     /**
-     * Soft delete
+     * TODO - Implement Soft delete in Repository
      */
     @JsonIgnore
     protected Boolean isDeleted = false;
+
+    /*
 
     @PrePersist
     protected void setCreatedAt() {
@@ -39,4 +44,9 @@ public abstract class BaseEntity {
     protected void setUpdatedAt() {
         this.updatedAt = new Date();
     }
+
+    @PreRemove
+    private void beforeRemove() { }
+
+     */
 }

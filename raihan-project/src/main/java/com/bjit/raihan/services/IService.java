@@ -7,6 +7,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+// this is why i love "strongly typed" languages!
 public interface IService<TEntity extends BaseEntity
         , TRepository extends IExtendedRepository<TEntity, Long>> {
 

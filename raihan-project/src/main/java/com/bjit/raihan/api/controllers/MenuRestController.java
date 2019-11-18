@@ -16,12 +16,12 @@ public class MenuRestController {
     private MenuService menuService;
 
     @GetMapping
-    public ResponseEntity find() {
+    public ResponseEntity findAll() {
         return ResponseEntity.ok(menuService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity find(@PathVariable Long id) {
+    public ResponseEntity findById(@PathVariable Long id) {
         return ResponseEntity.ok(menuService.findById(id));
     }
 

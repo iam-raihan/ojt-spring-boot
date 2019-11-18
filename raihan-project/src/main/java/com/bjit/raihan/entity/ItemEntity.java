@@ -43,9 +43,4 @@ public class ItemEntity extends BaseEntity {
             return value;
         }
     }
-
-    @PreRemove
-    private void beforeRemove() {
-        // remove from pivot table
-    }
 }
