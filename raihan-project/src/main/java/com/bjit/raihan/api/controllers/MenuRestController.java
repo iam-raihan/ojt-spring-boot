@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/menu")
+@RequestMapping("/menu")
 public class MenuRestController {
 
     @Autowired

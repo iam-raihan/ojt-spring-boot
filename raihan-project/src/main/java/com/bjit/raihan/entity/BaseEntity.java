@@ -1,12 +1,16 @@
 package com.bjit.raihan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @MappedSuperclass
+@EqualsAndHashCode()
 public abstract class BaseEntity {
 
     @Id
@@ -19,6 +23,12 @@ public abstract class BaseEntity {
     protected Date createdAt;
 
     protected Date updatedAt;
+
+    /**
+     * Soft delete
+     */
+    @JsonIgnore
+    protected Boolean isDeleted = false;
 
     @PrePersist
     protected void setCreatedAt() {

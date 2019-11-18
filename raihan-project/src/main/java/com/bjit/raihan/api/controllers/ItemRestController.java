@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 
 @RestController
-@RequestMapping("items")
+@RequestMapping("/items")
 public class ItemRestController {
 
     @Autowired

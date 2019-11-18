@@ -1,5 +1,7 @@
 package com.bjit.raihan.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,8 +27,21 @@ public class ItemEntity extends BaseEntity {
     @Builder.Default
     private Types type = Types.SubItem;
 
+    // @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     public enum Types {
-        MainItem, SubItem
+        MainItem("Main Item"),
+        SubItem("Sub Item");
+
+        private String value;
+
+        Types(final String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
     @PreRemove

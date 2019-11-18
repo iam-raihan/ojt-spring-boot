@@ -48,8 +48,8 @@ public class DatabaseSeeder {
                 .type(ItemEntity.Types.SubItem)
                 .build();
 
-        itemRepository.deleteAll();
-        itemRepository.saveAll(Arrays.asList(item1, item2, item3));
+        if (itemRepository.isEmpty())
+            itemRepository.saveAll(Arrays.asList(item1, item2, item3));
 
         /*
          *  Seed Menu
@@ -58,8 +58,8 @@ public class DatabaseSeeder {
         MenuEntity menu2 = MenuEntity.builder().name("Set Menu 2").items(List.of(item2, item3)).build();
         MenuEntity menu3 = MenuEntity.builder().name("Set Menu 3").items(List.of(item1, item2)).build();
 
-        menuRepository.deleteAll();
-        menuRepository.saveAll(Arrays.asList(menu1, menu2, menu3));
+        if (menuRepository.isEmpty())
+            menuRepository.saveAll(Arrays.asList(menu1, menu2, menu3));
 
         /*
          *  Seed Order
@@ -68,7 +68,7 @@ public class DatabaseSeeder {
         OrderEntity order2 = new OrderEntity().setItems(List.of(item2, item3));
         OrderEntity order3 = new OrderEntity().setItems(List.of(item1, item3));
 
-        orderRepository.deleteAll();
-        orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+        if (orderRepository.isEmpty())
+            orderRepository.saveAll(Arrays.asList(order1, order2, order3));
     }
 }
