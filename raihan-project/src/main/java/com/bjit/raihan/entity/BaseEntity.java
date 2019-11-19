@@ -15,16 +15,16 @@ import java.util.Date;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     // or
     // @SequenceGenerator(name = "mySeqGen", sequenceName = "menuSeq", allocationSize = 10)
     // @GeneratedValue(generator = "mySeqGen")
     protected Long id;
 
-    @CreationTimestamp
+//    @CreationTimestamp
     protected Date createdAt;
 
-    @UpdateTimestamp
+//    @UpdateTimestamp
     protected Date updatedAt;
 
     /**
@@ -32,8 +32,6 @@ public abstract class BaseEntity {
      */
     @JsonIgnore
     protected Boolean isDeleted = false;
-
-    /*
 
     @PrePersist
     protected void setCreatedAt() {
@@ -47,6 +45,4 @@ public abstract class BaseEntity {
 
     @PreRemove
     private void beforeRemove() { }
-
-     */
 }

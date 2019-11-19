@@ -2,6 +2,7 @@ package com.bjit.raihan.api.controllers;
 
 import com.bjit.raihan.entity.BaseEntity;
 import com.bjit.raihan.services.IService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,9 @@ public interface IRestController<TEntity extends BaseEntity
 
     @PostMapping
     default ResponseEntity create(@Valid @RequestBody TEntity entity) {
-        return ResponseEntity.ok(getService().save(entity));
+        getService().save(entity);
+        //  return ResponseEntity.created(...URI...).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(getService().save(entity));
     }
 
     @PutMapping("/{id}")

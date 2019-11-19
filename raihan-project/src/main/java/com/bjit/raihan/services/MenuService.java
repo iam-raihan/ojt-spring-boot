@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuService implements IService<MenuEntity, MenuRepository>{
 
-    private MenuRepository menuRepository;
+    private final MenuRepository menuRepository;
 
     @Override
     public MenuRepository getRepository() {

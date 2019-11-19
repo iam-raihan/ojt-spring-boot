@@ -5,7 +5,6 @@ import com.bjit.raihan.repository.IExtendedRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 // this is why i love "strongly typed" languages!
 public interface IService<TEntity extends BaseEntity
@@ -18,11 +17,10 @@ public interface IService<TEntity extends BaseEntity
     }
 
     default TEntity findById(Long id) throws EntityNotFoundException {
-        Optional<TEntity> result = getRepository().findById(id);
-        if (result.isPresent())
-            return result.get();
+        TEntity result = getRepository().findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("khuija pailam nah!"));
 
-        throw new EntityNotFoundException("Entity not found!");
+        return result;
     }
 
     default TEntity save(TEntity entity) {
@@ -34,6 +32,6 @@ public interface IService<TEntity extends BaseEntity
         if (getRepository().existsById(id))
             getRepository().deleteById(id);
         else
-            throw new EntityNotFoundException("Entity not found!");
+            throw new EntityNotFoundException("khuija pailam nah!");
     }
 }
