@@ -1,30 +1,22 @@
 package com.bjit.raihan.api.controllers;
 
+import com.bjit.raihan.entity.ItemEntity;
 import com.bjit.raihan.services.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/items")
-public class ItemRestController {
+@Slf4j
+@RequiredArgsConstructor
+public class ItemRestController implements IRestController<ItemEntity, ItemService> {
 
-    @Autowired
-    private ItemService itemService;
+    private final ItemService itemService;
 
-    @GetMapping
-    public ResponseEntity findAll() {
-        return ResponseEntity.ok(itemService.findAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
-        return ResponseEntity.ok(itemService.findById(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-        itemService.deleteById(id);
-        return ResponseEntity.ok().build();
+    @Override
+    public ItemService getService() {
+        return itemService;
     }
 }

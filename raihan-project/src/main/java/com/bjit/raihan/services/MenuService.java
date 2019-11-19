@@ -2,7 +2,8 @@ package com.bjit.raihan.services;
 
 import com.bjit.raihan.entity.MenuEntity;
 import com.bjit.raihan.repository.MenuRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,9 +13,9 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MenuService implements IService<MenuEntity, MenuRepository>{
 
-    @Autowired
     private MenuRepository menuRepository;
 
     @Override

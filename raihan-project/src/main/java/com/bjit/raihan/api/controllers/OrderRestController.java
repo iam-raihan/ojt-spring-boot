@@ -1,21 +1,22 @@
 package com.bjit.raihan.api.controllers;
 
-import com.bjit.raihan.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.bjit.raihan.entity.OrderEntity;
+import com.bjit.raihan.services.OrderService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/orders")
-public class OrderRestController {
+@Slf4j
+@RequiredArgsConstructor
+public class OrderRestController implements IRestController<OrderEntity, OrderService> {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderService orderService;
 
-    @GetMapping
-    public ResponseEntity getAll() {
-        return ResponseEntity.ok(orderRepository.findAll());
+    @Override
+    public OrderService getService() {
+        return orderService;
     }
 }

@@ -7,7 +7,7 @@ import com.bjit.raihan.repository.ItemRepository;
 import com.bjit.raihan.repository.MenuRepository;
 import com.bjit.raihan.repository.OrderRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -16,14 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DatabaseSeeder {
 
-    @Autowired
-    private MenuRepository menuRepository;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private OrderRepository orderRepository;
+    private final MenuRepository menuRepository;
+    private final ItemRepository itemRepository;
+    private final OrderRepository orderRepository;
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
@@ -62,7 +60,7 @@ public class DatabaseSeeder {
             menuRepository.saveAll(Arrays.asList(menu1, menu2, menu3));
 
         /*
-         *  Seed Order
+         *  Seed Orders
          */
         OrderEntity order1 = new OrderEntity().setItems(List.of(item1, item2));
         OrderEntity order2 = new OrderEntity().setItems(List.of(item2, item3));

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 // this is why i love "strongly typed" languages!
 public interface IService<TEntity extends BaseEntity
-        , TRepository extends IExtendedRepository<TEntity, Long>> {
+        , TRepository extends IExtendedRepository<TEntity>> {
 
     TRepository getRepository();
 
@@ -22,7 +22,7 @@ public interface IService<TEntity extends BaseEntity
         if (result.isPresent())
             return result.get();
 
-        throw new EntityNotFoundException(result.toString());
+        throw new EntityNotFoundException("Entity not found!");
     }
 
     default TEntity save(TEntity entity) {
@@ -31,6 +31,9 @@ public interface IService<TEntity extends BaseEntity
     }
 
     default void deleteById(Long id) {
-        getRepository().deleteById(id);
+        if (getRepository().existsById(id))
+            getRepository().deleteById(id);
+        else
+            throw new EntityNotFoundException("Entity not found!");
     }
 }

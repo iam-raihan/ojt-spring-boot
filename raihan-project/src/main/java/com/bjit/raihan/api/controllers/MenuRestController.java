@@ -1,33 +1,22 @@
 package com.bjit.raihan.api.controllers;
 
+import com.bjit.raihan.entity.MenuEntity;
 import com.bjit.raihan.services.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/menu")
-public class MenuRestController {
+@Slf4j
+@RequiredArgsConstructor
+public class MenuRestController implements IRestController<MenuEntity, MenuService> {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
-    @GetMapping
-    public ResponseEntity findAll() {
-        return ResponseEntity.ok(menuService.findAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
-        return ResponseEntity.ok(menuService.findById(id));
-    }
-
-    @GetMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-        menuService.deleteById(id);
-        return ResponseEntity.ok(new Object());
+    @Override
+    public MenuService getService() {
+        return menuService;
     }
 }

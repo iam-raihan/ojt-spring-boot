@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
-@EqualsAndHashCode()
+@EqualsAndHashCode
 public abstract class BaseEntity {
 
     @Id
