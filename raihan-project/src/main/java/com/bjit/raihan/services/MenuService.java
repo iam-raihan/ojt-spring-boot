@@ -23,25 +23,33 @@ public class MenuService implements IService<MenuEntity, MenuRepository>{
         return menuRepository;
     }
 
+    @Cacheable(cacheNames = "menus")
     public List<MenuEntity> findAll() {
         return IService.super.findAll();
     }
 
-    @Cacheable(cacheNames = "menus", key = "#id")
+    @Cacheable(cacheNames = "menu", key = "#id")
     public MenuEntity findById(Long id) throws EntityNotFoundException {
         return IService.super.findById(id);
     }
 
-    @CachePut(cacheNames = "menus", key = "#entity.id")
+    @CachePut(cacheNames = "menu", key = "#entity.id")
     public MenuEntity save(MenuEntity entity) {
         return IService.super.save(entity);
     }
 
-    @CacheEvict(cacheNames = "menus", key = "#id")
+    @CachePut(cacheNames = "menu", key = "#entity.id")
+    public MenuEntity update(MenuEntity entity, Long id) {
+        clearCache();
+        return IService.super.update(entity, id);
+    }
+
+    @CacheEvict(cacheNames = "menu", key = "#id")
     public void deleteById(Long id) {
+        clearCache();
         IService.super.deleteById(id);
     }
 
-    @CacheEvict(value="menus", allEntries = true)
+    @CacheEvict(cacheNames = "menus")
     public void clearCache() { }
 }

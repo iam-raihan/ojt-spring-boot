@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -27,4 +28,22 @@ public class MenuEntity extends BaseEntity {
             , uniqueConstraints = @UniqueConstraint(name = "UK_MENU_ID", columnNames = {"MENU_ID", "ITEM_ID"})
         )
     private List<ItemEntity> items;
+
+    public Double getTotalPrice() {
+        if (items == null)
+            return 0.0;
+
+        return items.stream().mapToDouble(ItemEntity::getPrice).sum();
+    }
+
+    public String menuDetails() {
+        if (items == null)
+            return "";
+
+        String details = items.stream()
+                .map(ItemEntity::getName)
+                .collect(Collectors.joining(", "));
+
+        return "Package includes: " + details;
+    }
 }

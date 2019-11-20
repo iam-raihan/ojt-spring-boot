@@ -2,18 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="layout/header :: header"></div>
-<div>
+<head th:insert="fragments/header :: header">
+    <title>BJIT Canteen</title>
+</head>
 
-
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal">BJIT Canteen</h5>
+        <a class="btn btn-outline-primary" href="#">Sign in</a>
     </div>
 
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Set Menu Pricing</h1>
+        <p class="lead">Personalized order option is available!</p>
+    </div>
 
-</div>
-<div th:insert="layout/footer :: footer"></div>
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow" th:each="menu : ${menus}">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal" th:text="${menu.name}"></h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">[[${menu.getTotalPrice()}]]৳ <small class="text-muted">/ meal</small></h1>
+                    <p th:text="${menu.menuDetails()}"></p>
+                    <button type="button" class="btn btn-md btn-block btn-primary">Schedule Order</button>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="my-0 font-weight-normal">Personalized</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"> ৳৳৳ <small class="text-muted">/ meal</small></h1>
+                    <p>As you prefer in lunch, order from varieties of food items.</p>
+                    <button type="button" class="btn btn-md btn-block btn-outline-primary">Schedule Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="fragments/footer :: footer"></div>
+</body>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/menus")
 @Slf4j
 @RequiredArgsConstructor
 public class MenuRestController implements IRestController<MenuEntity, MenuService> {

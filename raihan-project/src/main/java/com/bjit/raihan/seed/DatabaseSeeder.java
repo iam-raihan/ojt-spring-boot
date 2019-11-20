@@ -30,31 +30,49 @@ public class DatabaseSeeder {
          */
         ItemEntity item1 = ItemEntity.builder()
                 .name("Chicken")
-                .price(80)
+                .price(60)
                 .type(ItemEntity.Types.MainItem)
                 .build();
 
         ItemEntity item2 = ItemEntity.builder()
                 .name("Beef")
-                .price(100)
+                .price(80)
                 .type(ItemEntity.Types.MainItem)
                 .build();
 
         ItemEntity item3 = ItemEntity.builder()
+                .name("Rice")
+                .price(20)
+                .type(ItemEntity.Types.SubItem)
+                .build();
+
+        ItemEntity item4 = ItemEntity.builder()
                 .name("Dal")
                 .price(0)
                 .type(ItemEntity.Types.SubItem)
                 .build();
 
+        ItemEntity item5 = ItemEntity.builder()
+                .name("Salad")
+                .price(0)
+                .type(ItemEntity.Types.SubItem)
+                .build();
+
         if (itemRepository.isEmpty())
-            itemRepository.saveAll(Arrays.asList(item1, item2, item3));
+            itemRepository.saveAll(Arrays.asList(item1, item2, item3, item4, item5));
 
         /*
          *  Seed Menu
          */
-        MenuEntity menu1 = MenuEntity.builder().name("Set Menu 1").items(List.of(item1, item3)).build();
-        MenuEntity menu2 = MenuEntity.builder().name("Set Menu 2").items(List.of(item2, item3)).build();
-        MenuEntity menu3 = MenuEntity.builder().name("Set Menu 3").items(List.of(item1, item2)).build();
+        MenuEntity menu1 = MenuEntity.builder().name("Set Menu 1")
+                .items(List.of(item1, item3, item4, item5))
+                .build();
+        MenuEntity menu2 = MenuEntity.builder().name("Set Menu 2")
+                .items(List.of(item2, item3, item4, item5))
+                .build();
+        MenuEntity menu3 = MenuEntity.builder().name("Set Menu 3")
+                .items(List.of(item1, item2, item3, item4, item5))
+                .build();
 
         if (menuRepository.isEmpty())
             menuRepository.saveAll(Arrays.asList(menu1, menu2, menu3));

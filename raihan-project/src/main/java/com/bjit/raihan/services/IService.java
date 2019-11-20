@@ -28,6 +28,21 @@ public interface IService<TEntity extends BaseEntity
         return entity;
     }
 
+    /***
+     * there's a problem here.
+     * user can manipulate createdAt date or other attributes.
+     * TODO - implement DTO.
+     */
+    default TEntity update(TEntity entity, Long id) {
+        if (getRepository().existsById(id))
+        {
+            entity.setId(id);
+            return getRepository().save(entity);
+        }
+        else
+            throw new EntityNotFoundException("khuija pailam nah!");
+    }
+
     default void deleteById(Long id) {
         if (getRepository().existsById(id))
             getRepository().deleteById(id);

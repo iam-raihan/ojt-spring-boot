@@ -33,8 +33,8 @@ public interface IRestController<TEntity extends BaseEntity
 
     @PutMapping("/{id}")
     default ResponseEntity update(@Valid @RequestBody TEntity entity, @PathVariable Long id) {
-        entity.setId(id);
-        return ResponseEntity.ok(getService().save(entity));
+        getService().update(entity, id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
