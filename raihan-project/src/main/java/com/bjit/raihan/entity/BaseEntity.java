@@ -22,6 +22,7 @@ public abstract class BaseEntity {
     protected Long id;
 
 //    @CreationTimestamp
+    @Column(nullable = false)
     protected Date createdAt;
 
 //    @UpdateTimestamp
@@ -31,6 +32,7 @@ public abstract class BaseEntity {
      * TODO - Implement Soft delete in Repository
      */
     @JsonIgnore
+    @Column(nullable = false)
     protected Boolean isDeleted = false;
 
     @PrePersist

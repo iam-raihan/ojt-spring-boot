@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
 @Table(name = "menus")
 public class MenuEntity extends BaseEntity {
 
-    @NotBlank(message = "Menu name is required")
+    @NotBlank()
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -36,6 +37,7 @@ public class MenuEntity extends BaseEntity {
         return items.stream().mapToDouble(ItemEntity::getPrice).sum();
     }
 
+    // if getMenuDetails() then auto includes in json
     public String menuDetails() {
         if (items == null)
             return "";

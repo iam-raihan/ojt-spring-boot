@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * something like lombok.Builder does
  */
 public class ApiResponse {
-    private HttpStatus status = HttpStatus.OK;
+    private int status = HttpStatus.OK.value();
     private String message;
     private Object data;
     private Object error;
@@ -69,5 +69,9 @@ public class ApiResponse {
 
     public ResponseEntity<Object> send() {
         return ResponseEntity.status(status).body(this);
+    }
+
+    private void setStatus(HttpStatus status) {
+        this.status = status.value();
     }
 }

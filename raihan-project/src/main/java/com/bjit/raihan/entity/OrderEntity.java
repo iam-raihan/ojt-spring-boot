@@ -20,12 +20,13 @@ import java.util.stream.Collectors;
 @Table(name = "orders")
 public class OrderEntity extends BaseEntity {
 
-    @NotBlank()
+    @NotBlank
     private String details;
 
     @Min(value = 0)
     private double totalPrice;
 
+    @Column(nullable = false)
     private Date orderDate;
 
     @PrePersist

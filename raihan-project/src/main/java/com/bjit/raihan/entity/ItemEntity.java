@@ -19,12 +19,14 @@ import javax.validation.constraints.*;
 public class ItemEntity extends BaseEntity {
 
     @NotBlank
+    @Column(nullable = false)
     private String name;
 
     @Min(value = 0)
     private double price;
 
     @Builder.Default
+    @Column(nullable = false)
     private Types type = Types.SubItem;
 
     // @JsonFormat(shape = JsonFormat.Shape.OBJECT)

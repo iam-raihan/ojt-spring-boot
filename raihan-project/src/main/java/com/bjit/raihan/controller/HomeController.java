@@ -18,7 +18,7 @@ public class HomeController {
 
 	private final MenuService menuService;
 
-	@GetMapping("/")
+	@GetMapping(value = "/", name = "home")
 	public String viewIndex(Model model) {
 		List<MenuEntity> menus = menuService.findAll()
 				.stream()

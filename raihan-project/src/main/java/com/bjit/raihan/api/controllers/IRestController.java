@@ -36,7 +36,8 @@ public interface IRestController<TEntity extends BaseEntity
     }
 
     @PutMapping("/{id}")
-    default ResponseEntity update(@Valid @RequestBody TEntity entity, @PathVariable Long id) {
+    default ResponseEntity update(@Valid @RequestBody TEntity entity
+            , @PathVariable Long id) {
         TEntity data = getService().update(entity, id);
         return new ApiResponse("Entity Updated").accepted(data);
     }
