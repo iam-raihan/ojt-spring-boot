@@ -1,5 +1,6 @@
 package com.bjit.raihan.api.errors;
 
+import com.bjit.raihan.api.ApiResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,30 +20,20 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex
             , HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<ApiSubError> subErrors = new ArrayList<>();
+        List<ApiValidationError> errors = new ArrayList<>();
         ex.getBindingResult().getAllErrors()
-                .forEach(error -> subErrors.add(new ApiValidationError(error)));
+                .forEach(error -> errors.add(new ApiValidationError(error)));
 
-        ApiError error = ApiError.builder()
+        return new ApiResponse("Validation Error")
                 .status(HttpStatus.BAD_REQUEST)
-                .message("Validation Error")
-                .subErrors(subErrors)
-                .build();
-
-        return buildResponseEntity(error);
+                .errors(errors)
+                .send();
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex) {
-        ApiError apiError = ApiError.builder()
+    protected ResponseEntity handleEntityNotFound(EntityNotFoundException ex) {
+        return new ApiResponse(ex.getMessage())
                 .status(HttpStatus.NOT_FOUND)
-                .message(ex.getMessage())
-                .build();
-
-        return buildResponseEntity(apiError);
-    }
-
-    private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
-        return new ResponseEntity<>(apiError, apiError.getStatus());
+                .send();
     }
 }

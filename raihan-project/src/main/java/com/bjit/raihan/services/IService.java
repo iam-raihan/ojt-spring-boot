@@ -24,7 +24,7 @@ public interface IService<TEntity extends BaseEntity
     }
 
     default TEntity save(TEntity entity) {
-        getRepository().save(entity);
+        entity = getRepository().save(entity);
         return entity;
     }
 
@@ -34,13 +34,11 @@ public interface IService<TEntity extends BaseEntity
      * TODO - implement DTO.
      */
     default TEntity update(TEntity entity, Long id) {
-        if (getRepository().existsById(id))
-        {
-            entity.setId(id);
-            return getRepository().save(entity);
-        }
-        else
-            throw new EntityNotFoundException("khuija pailam nah!");
+        TEntity result = findById(id);
+        entity.setId(id);
+        entity.setCreatedAt(result.getCreatedAt());
+        entity.setIsDeleted(result.getIsDeleted());
+        return save(entity);
     }
 
     default void deleteById(Long id) {

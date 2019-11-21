@@ -1,6 +1,7 @@
 package com.bjit.raihan.services;
 
 import com.bjit.raihan.entity.MenuEntity;
+import com.bjit.raihan.repository.IExtendedRepository;
 import com.bjit.raihan.repository.MenuRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MenuService implements IService<MenuEntity, MenuRepository>{
+public class MenuService implements IService<MenuEntity, IExtendedRepository<MenuEntity>>{
 
     private final MenuRepository menuRepository;
 
@@ -38,7 +39,7 @@ public class MenuService implements IService<MenuEntity, MenuRepository>{
         return IService.super.save(entity);
     }
 
-    @CachePut(cacheNames = "menu", key = "#entity.id")
+    @CachePut(cacheNames = "menu", key = "#id")
     public MenuEntity update(MenuEntity entity, Long id) {
         clearCache();
         return IService.super.update(entity, id);

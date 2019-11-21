@@ -7,7 +7,7 @@ import org.springframework.validation.ObjectError;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-class ApiValidationError extends ApiSubError {
+class ApiValidationError {
 
     private String field;
     private Object rejectedValue;

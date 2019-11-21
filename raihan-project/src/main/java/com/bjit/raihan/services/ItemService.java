@@ -1,6 +1,7 @@
 package com.bjit.raihan.services;
 
 import com.bjit.raihan.entity.ItemEntity;
+import com.bjit.raihan.repository.IExtendedRepository;
 import com.bjit.raihan.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import javax.persistence.EntityManager;
 
 @Service
 @RequiredArgsConstructor
-public class ItemService implements IService<ItemEntity, ItemRepository> {
+public class ItemService implements IService<ItemEntity, IExtendedRepository<ItemEntity>> {
 
     private final ItemRepository itemRepository;
     private final EntityManager entityManager;
