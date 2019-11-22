@@ -80,9 +80,9 @@ public class DatabaseSeeder {
         /*
          *  Seed Orders
          */
-        OrderEntity order1 = new OrderEntity().setItems(List.of(item1, item2));
-        OrderEntity order2 = new OrderEntity().setItems(List.of(item2, item3));
-        OrderEntity order3 = new OrderEntity().setItems(List.of(item1, item3));
+        OrderEntity order1 = new OrderEntity().setItems(menu1);
+        OrderEntity order2 = new OrderEntity().setItems(menu2);
+        OrderEntity order3 = new OrderEntity().setItems(List.of(item1, item3, item4));
 
         if (orderRepository.isEmpty())
             orderRepository.saveAll(Arrays.asList(order1, order2, order3));

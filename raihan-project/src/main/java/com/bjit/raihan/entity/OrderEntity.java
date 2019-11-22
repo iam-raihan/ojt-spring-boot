@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,5 +45,14 @@ public class OrderEntity extends BaseEntity {
                 .sum();
 
         return this;
+    }
+
+    public OrderEntity setItems(MenuEntity menu) {
+        return setItems(menu.getItems());
+    }
+
+    public String readableOrderDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm a");
+        return sdf.format(orderDate);
     }
 }
