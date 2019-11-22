@@ -11,8 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ApiErrorHandler extends ResponseEntityExceptionHandler {
@@ -20,9 +20,11 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex
             , HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<ApiValidationError> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors()
-                .forEach(error -> errors.add(new ApiValidationError(error)));
+        List<ApiValidationError> errors = ex.getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(ApiValidationError::new)
+                .collect(Collectors.toList());
 
         return new ApiResponse("Validation Error")
                 .status(HttpStatus.BAD_REQUEST)

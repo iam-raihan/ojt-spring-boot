@@ -26,7 +26,7 @@ public class OrderController {
     private final ItemService itemService;
 
     @GetMapping(
-            value = "/",
+            value = "",
             name = "view"
     )
     public String viewOrders(Model model) {
@@ -71,7 +71,7 @@ public class OrderController {
     }
 
     @PostMapping(
-            value = "/",
+            value = "",
             name = "create"
     )
     public String create(@Valid @RequestBody OrderEntity order, Errors errors) {
