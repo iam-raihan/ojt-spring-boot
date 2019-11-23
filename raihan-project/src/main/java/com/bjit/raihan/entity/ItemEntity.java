@@ -32,7 +32,8 @@ public class ItemEntity extends BaseEntity {
     // @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     public enum Types {
         MainItem("Main Item"),
-        SubItem("Sub Item");
+        SubItem("Sub Item"),
+        Snacks("Snacks");
 
         private String value;
 
