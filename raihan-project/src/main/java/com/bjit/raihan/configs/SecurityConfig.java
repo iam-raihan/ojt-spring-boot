@@ -40,6 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TODO - implement JWT then turn on APi Auth
-        web.ignoring().antMatchers("/", "/api/**");
+        web.ignoring().antMatchers("/**", "/api/**");
     }
 }

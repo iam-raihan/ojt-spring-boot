@@ -1,5 +1,6 @@
 package com.bjit.raihan.controller;
 
+import com.bjit.raihan.dto.OrderDTO;
 import com.bjit.raihan.entity.ItemEntity;
 import com.bjit.raihan.entity.MenuEntity;
 import com.bjit.raihan.entity.OrderEntity;
@@ -9,11 +10,11 @@ import com.bjit.raihan.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -32,6 +33,7 @@ public class OrderController {
     public String viewOrders(Model model) {
         // TODO - get all by auth user id
         List<OrderEntity> orders = orderService.findAll();
+        Collections.reverse(orders);
         model.addAttribute("orders", orders);
 
         return "orders/index";
@@ -42,11 +44,9 @@ public class OrderController {
             name = "create.view"
     )
     public String viewNewOrderForm(Model model) {
-        List<MenuEntity> menus = menuService.findAll();
         List<ItemEntity> items = itemService.findAll();
-
-        model.addAttribute("menus", menus);
-        model.addAttribute("items", items);
+        OrderDTO orderDTO = new OrderDTO().setItems(items);
+        model.addAttribute("orderDTO", orderDTO);
 
         return "orders/create";
     }
@@ -56,31 +56,30 @@ public class OrderController {
             name = "create.menu.view"
     )
     public String viewNewOrderForm(Model model, @PathVariable Long id) {
-        List<MenuEntity> menus = menuService.findAll();
+        MenuEntity menu = menuService.findById(id);
+        // TODO - handle EntityNotFoundException
         List<ItemEntity> items = itemService.findAll();
-        MenuEntity selectedMenu = menus.stream()
-                .filter(menu -> menu.getId().equals(id))
-                .findFirst()
-                .orElseThrow(EntityNotFoundException::new);
+        OrderDTO orderDTO = new OrderDTO().setItems(items);
+        orderDTO.setSelectedItems(menu.getItems());
 
-        model.addAttribute("menus", menus);
-        model.addAttribute("selectedMenu", selectedMenu);
-        model.addAttribute("items", items);
+        model.addAttribute("orderDTO", orderDTO);
 
         return "orders/create";
     }
 
     @PostMapping(
-            value = "",
+            value = "/create",
             name = "create"
     )
-    public String create(@Valid @RequestBody OrderEntity order, Errors errors) {
-        if (errors.hasErrors()) {
-            // TODO
-            return "";
+    public String create(@Valid OrderDTO orderDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<ItemEntity> items = itemService.findAll();
+            model.addAttribute("orderDTO", orderDTO.setItems(items));
+
+            return "orders/create";
         }
 
-        orderService.save(order);
+        orderService.save(orderDTO.toOrder());
         // TODO - show notification
         return "redirect:/orders";
     }

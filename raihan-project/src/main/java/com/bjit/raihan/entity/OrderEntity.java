@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,15 +28,11 @@ public class OrderEntity extends BaseEntity {
     @Min(value = 0)
     private double totalPrice;
 
+    @NotNull(message = "Order date is required")
     @Column(nullable = false)
     private Date orderDate;
 
-    @PrePersist
-    private void orderDate() {
-        this.orderDate = new Date();
-    }
-
-    public OrderEntity setItems(List<ItemEntity> items) {
+    public OrderEntity(List<ItemEntity> items) {
         details = items.stream()
                 .map(ItemEntity::getName)
                 .collect(Collectors.joining(", "));
@@ -43,12 +40,16 @@ public class OrderEntity extends BaseEntity {
         totalPrice = items.stream()
                 .mapToDouble(ItemEntity::getPrice)
                 .sum();
-
-        return this;
     }
 
-    public OrderEntity setItems(MenuEntity menu) {
-        return setItems(menu.getItems());
+    public OrderEntity(MenuEntity menu) {
+        this(menu.getItems());
+    }
+
+    @PrePersist
+    private void orderDate() {
+        if (orderDate == null)
+            orderDate = new Date();
     }
 
     public String readableOrderDate() {

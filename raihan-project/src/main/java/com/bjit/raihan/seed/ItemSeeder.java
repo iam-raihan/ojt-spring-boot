@@ -26,10 +26,10 @@ public class ItemSeeder implements ISeeder<ItemEntity, ItemRepository> {
         items = new ArrayList<>();
 
         getMainItems().forEach(
-                (name, price) -> items.add(getEntity(name, price, Types.MainItem))
+                (name, price) -> items.add(getEntity(name, price, Types.MainItems))
         );
         getSubItems().forEach(
-                (name, price) -> items.add(getEntity(name, price, Types.SubItem))
+                (name, price) -> items.add(getEntity(name, price, Types.SubItems))
         );
         getSnacksItems().forEach(
                 (name, price) -> items.add(getEntity(name, price, Types.Snacks))

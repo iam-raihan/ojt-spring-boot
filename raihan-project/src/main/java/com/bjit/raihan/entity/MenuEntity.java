@@ -46,6 +46,6 @@ public class MenuEntity extends BaseEntity {
                 .map(ItemEntity::getName)
                 .collect(Collectors.joining(", "));
 
-        return "Package includes: " + details;
+        return details;
     }
 }
