@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="header">
+<head th:fragment="header (title)">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!--/*@thymesVar id="title" type=""*/-->
+    <title th:text="${title}"></title>
 </head>

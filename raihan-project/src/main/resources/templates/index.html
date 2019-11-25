@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="fragments/header :: header">
-    <title>BJIT Canteen</title>
-</head>
+<head th:include="fragments/header :: header ('BJIT Canteen')"></head>
 
 <body>
     <div th:insert="fragments/navbar"></div>

@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/header :: header">
-    <title>Order History</title>
-</head>
-<body>
-<div th:insert="fragments/navbar"></div>
+<head th:insert="fragments/header :: header ('New Order')"></head>
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">New Order</h1>
+<body>
+    <div th:insert="fragments/navbar"></div>
     <style>
         .food-items {
             overflow:auto;
@@ -23,103 +19,107 @@
             color: #dc3545;
         }
     </style>
-</div>
 
-<div class="container">
-    <form th:action="${#mvc.url('orders#create').build()}" method="post">
-        <div class="row">
-            <div class="col-xl-4 col-md-6"
-                 th:each="element : ${orderDTO.getGroupedItems()}"
-            >
-                <legend class="border-bottom rounded-bottom"
-                        th:text="${element.getKey().getValue()}"
-                        th:classappend="${#fields.hasErrors('${orderDTO.selectedItems}')} ? 'border-danger' : 'border-primary'"
-                ></legend>
+    <div class="py-3 mx-auto text-center">
+        <h1 class="display-4">New Order</h1>
+    </div>
 
-                <ul class="list-group food-items">
-                    <li class="list-group-item list-group-item-action"
-                        th:each="item : ${element.getValue()}"
-                        th:onclick="|onItemClicked(${item.getId()})|"
-                        th:object="${item}"
-                    >
-                        <div class="form-check d-flex w-100 justify-content-between">
-                            <label th:onclick="|onItemClicked(${item.getId()})|">
-                                <input class="form-check-input mt-2" type="checkbox" name="selectedItems"
-                                       th:id="|item*{getId()}|"
-                                       th:value="*{getId()}"
-                                       th:data-price="*{getPrice()}"
-                                       th:checked="${orderDTO.isSelected(item.getId())}"
-                                >
-                                <h5 class="form-check-label" th:for="|item*{getId()}|" th:text="*{getName()}"></h5>
-                            </label>
-                            <h5>[[*{getPrice()}]]&#x9f3;</h5>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <div class="container">
+        <form th:action="${#mvc.url('orders#create').build()}" method="post">
+            <div class="row">
+                <div class="col-xl-4 col-md-6"
+                     th:each="element : ${orderDTO.getGroupedItems()}"
+                >
+                    <legend class="border-bottom rounded-bottom"
+                            th:text="${element.getKey().getValue()}"
+                            th:classappend="${#fields.hasErrors('${orderDTO.selectedItems}')} ? 'border-danger' : 'border-primary'"
+                    ></legend>
 
-            <div class="col-xl-12 col-md-6">
-                <legend class="border-bottom border-primary rounded-bottom">Place Order</legend>
+                    <ul class="list-group food-items">
+                        <li class="list-group-item list-group-item-action"
+                            th:each="item : ${element.getValue()}"
+                            th:onclick="|onItemClicked(${item.getId()})|"
+                            th:object="${item}"
+                        >
+                            <div class="form-check d-flex w-100 justify-content-between">
+                                <label th:onclick="|onItemClicked(${item.getId()})|">
+                                    <input class="form-check-input mt-2" type="checkbox" name="selectedItems"
+                                           th:id="|item*{getId()}|"
+                                           th:value="*{getId()}"
+                                           th:data-price="*{getPrice()}"
+                                           th:checked="${orderDTO.isSelected(item.getId())}"
+                                    >
+                                    <h5 class="form-check-label" th:for="|item*{getId()}|" th:text="*{getName()}"></h5>
+                                </label>
+                                <h5>[[*{getPrice()}]]&#x9f3;</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="row">
-                            <div class="col">
-                                <div class="list-group-item border-0 py-1">
-                                    <div class="d-flex">
-                                        <h5 class="col-4 p-0 mt-2">Location</h5>
-                                        <h5 class="col-8 p-0">
-                                            <input type="text" class="form-control" name="location" placeholder="Building, Floor, Room No"
-                                                   th:field="${orderDTO.location}"
-                                                   th:errorclass="is-invalid"
-                                            >
-                                            <div class="invalid-feedback" th:errors="${orderDTO.location}"></div>
-                                        </h5>
+                <div class="col-xl-12 col-md-6">
+                    <legend class="border-bottom border-primary rounded-bottom">Place Order</legend>
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="list-group-item border-0 py-1">
+                                        <div class="d-flex">
+                                            <h5 class="col-4 p-0 mt-2">Location</h5>
+                                            <h5 class="col-8 p-0">
+                                                <input type="text" class="form-control" name="location" placeholder="Building, Floor, Room No"
+                                                       th:field="${orderDTO.location}"
+                                                       th:errorclass="is-invalid"
+                                                >
+                                                <div class="invalid-feedback" th:errors="${orderDTO.location}"></div>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="list-group-item border-0 py-1">
+                                        <div class="d-flex">
+                                            <h5 class="col-4 p-0 mt-2">Date</h5>
+                                            <h5 class="col-8 p-0">
+                                                <input type="date" class="form-control"
+                                                       th:field="${orderDTO.orderDate}"
+                                                       th:errorclass="is-invalid"
+                                                >
+                                                <div class="invalid-feedback" th:errors="${orderDTO.orderDate}"></div>
+                                            </h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="list-group-item border-0 py-1">
-                                    <div class="d-flex">
-                                        <h5 class="col-4 p-0 mt-2">Date</h5>
-                                        <h5 class="col-8 p-0">
-                                            <input type="date" class="form-control"
-                                                   th:field="${orderDTO.orderDate}"
-                                                   th:errorclass="is-invalid"
-                                            >
-                                            <div class="invalid-feedback" th:errors="${orderDTO.orderDate}"></div>
-                                        </h5>
+                        <div class="col-xl-4 offset-xl-2">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="list-group-item border-0 py-1">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5>Total Cost</h5>
+                                            <h5 id="price"></h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-xl-4 offset-xl-2">
-                        <div class="row">
-                            <div class="col">
-                                <div class="list-group-item border-0 py-1">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5>Total Cost</h5>
-                                        <h5 id="price"></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="list-group-item border-0 py-1">
-                                    <div class="d-flex">
-                                        <h5 class="col-8 p-0 mt-2">
-                                            <small class="error-block" th:errors="${orderDTO.selectedItems}"></small>
-                                        </h5>
-                                        <h5 class="col-4 p-0 text-right">
-                                            <input type="submit" class="btn btn-outline-primary" value="Place Order">
-                                        </h5>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="list-group-item border-0 py-1">
+                                        <div class="d-flex">
+                                            <h5 class="col-8 p-0 mt-2">
+                                                <small class="error-block" th:errors="${orderDTO.selectedItems}"></small>
+                                            </h5>
+                                            <h5 class="col-4 p-0 text-right">
+                                                <input type="submit" class="btn btn-outline-primary" value="Place Order">
+                                            </h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -127,39 +127,38 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <small class="text-danger pl-4">* responsive page</small>
-        </div>
-    </form>
-</div>
+            <div class="row">
+                <small class="text-danger pl-4">* responsive page</small>
+            </div>
+        </form>
+    </div>
 
-<script>
-    window.onload = function () {
-        if (window.jQuery) {
-            calculatePrice();
-            $("input[type=checkbox]").click(function(e){
-                e.stopPropagation();
+    <script>
+        window.onload = function () {
+            if (window.jQuery) {
                 calculatePrice();
-            });
+                $("input[type=checkbox]").click(function(e){
+                    e.stopPropagation();
+                    calculatePrice();
+                });
+            }
+        };
+
+        function onItemClicked(id) {
+            $("#item" + id).click();
         }
-    };
 
-    function onItemClicked(id) {
-        $("#item" + id).click();
-    }
+        function calculatePrice() {
+            var sum = 0;
+            $("input[type=checkbox]:checked").each(function () {
+                    sum += parseFloat(($(this).data('price')))
+            });
 
-    function calculatePrice() {
-        var sum = 0;
-        $("input[type=checkbox]:checked").each(function () {
-                sum += parseFloat(($(this).data('price')))
-        });
+            $("#price").html(sum.toFixed(1) + "&#x9f3;");
+            console.log(sum)
+        }
+    </script>
 
-        $("#price").html(sum.toFixed(1) + "&#x9f3;");
-        console.log(sum)
-    }
-</script>
-
-<div th:insert="fragments/footer :: footer"></div>
+    <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

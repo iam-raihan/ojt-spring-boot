@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/header :: header">
-    <title>Order History</title>
-</head>
+<head th:insert="fragments/header :: header ('Order History')"></head>
+
 <body>
     <div th:insert="fragments/navbar"></div>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div class="py-3 mx-auto text-center">
         <h1 class="display-4">Order History</h1>
     </div>
 
