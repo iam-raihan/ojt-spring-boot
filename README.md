@@ -1,4 +1,5 @@
-# OJT BJIT
-mvn clean package spring-boot:run --projects raihan-project
+# OJT BJIT Project
 
-Preparation for On Job Training at BJIT
+mvn clean package spring-boot:run
+
+project for On Job Training at BJIT
